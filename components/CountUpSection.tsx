@@ -15,6 +15,16 @@ const CountUpSection = () => {
     triggerOnce: true,
     threshold: 0.1,
   });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Não renderiza nada até o componente estar montado no cliente
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <section ref={ref} className="container py-24 bg-[#111827] rounded-2xl">
@@ -28,7 +38,7 @@ const CountUpSection = () => {
               {inView ? (
                 <CountUp end={stat.value} duration={2} />
               ) : (
-                "0"
+                '0'
               )}
               <span className="text-[#1C64F2]">+</span>
             </div>
@@ -47,6 +57,8 @@ const CountUp = ({ end, duration }: { end: number; duration: number }) => {
 
   useEffect(() => {
     startTimeRef.current = Date.now();
+    countRef.current = 0;
+    
     const animate = () => {
       const now = Date.now();
       const progress = Math.min((now - startTimeRef.current) / (duration * 1000), 1);
@@ -61,6 +73,10 @@ const CountUp = ({ end, duration }: { end: number; duration: number }) => {
     };
     
     requestAnimationFrame(animate);
+    
+    return () => {
+      countRef.current = 0;
+    };
   }, [end, duration]);
 
   return <>{count}</>;
