@@ -20,7 +20,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body 
+      cz-shortcut-listen="true"
+      className={inter.className}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

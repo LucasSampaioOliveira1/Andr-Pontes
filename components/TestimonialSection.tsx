@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { Card } from "@/components/ui/card";
 import { Quote } from "lucide-react";
@@ -52,6 +53,16 @@ const testimonials = [
 ];
 
 const TestimonialSection = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <section className="container py-16 bg-[#111827]">
       <h2 className="text-3xl font-bold text-center mb-12 text-white">
