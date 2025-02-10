@@ -27,7 +27,7 @@ export default function Home() {
           </div>
           <div className="relative aspect-video w-full">
             <img
-              src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30"
+              src="/img/foto1.jpg"
               alt="DJ em evento"
               className="rounded-lg object-cover w-full h-full"
             />
