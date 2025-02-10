@@ -8,7 +8,7 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node", // Alterado para "node" para resolver módulos corretamente
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -18,11 +18,13 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",  // Adicionando baseUrl aqui
+    "baseUrl": ".",  // Base URL para resolução de módulos
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": ["./*"]  // Mapeia o alias "@" para a raiz do projeto
+    },
+    "rootDir": ".", // Define a raiz do projeto como o diretório atual
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
+
