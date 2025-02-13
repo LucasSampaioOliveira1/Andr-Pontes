@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="w-full min-h-screen flex flex-col items-center pt-32 bg-[#111827]">
       {/* Hero Section */}
-      <section className="container flex-1 flex items-center">
+      <section className="container flex-1 flex items-center px-4 md:px-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full">
           <div className="text-center md:text-left">
             <h1 className="text-4xl font-bold tracking-tight mb-4 text-white">

@@ -69,7 +69,7 @@ const TestimonialSection = () => {
         O que nossos clientes dizem
       </h2>
       
-      <div className="relative">
+      <div className="relative mx-4 md:mx-0"> {/* Adicionado margin para mobile */}
         <button className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full text-[#1C64F2] swiper-button-prev hover:text-[#1C64F2]/80 transition-colors">
           <ChevronLeft className="h-8 w-8" />
         </button>

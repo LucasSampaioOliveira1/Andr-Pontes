@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="w-full bg-[#374151] text-white">
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto py-8 px-4 md:px-0"> {/* Adicionado padding horizontal para mobile */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4 text-white">VortekLabs</h3>

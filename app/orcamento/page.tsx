@@ -23,6 +23,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
+const WHATSAPP_NUMBER = "5527999164443"; // Coloque seu número aqui no formato: 55 + DDD + número
+
 const formSchema = z.object({
   nome: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
   email: z.string().email("Email inválido"),
@@ -44,30 +46,36 @@ export default function OrcamentoPage() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast.success("Orçamento enviado!", {
-      description: "Entraremos em contato em breve.",
+    const message = `*Novo Orçamento*\n\n*Nome:* ${values.nome}\n*Email:* ${values.email}\n*Telefone:* ${values.telefone}\n*Tipo de Serviço:* ${values.tipoServico}\n*Mensagem:* ${values.mensagem}`;
+    
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, '_blank');
+    
+    toast.success("Redirecionando para o WhatsApp!", {
+      description: "Continue o atendimento no WhatsApp.",
     });
+    
     form.reset();
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-[#111827]">
       <div className="container max-w-2xl mx-auto py-8">
-        <h1 className="text-4xl font-bold mb-8 text-center">Solicitar Orçamento</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center text-white">Solicitar Orçamento</h1>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-white p-8 rounded-lg shadow-md">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 bg-[#374151] p-8 rounded-lg shadow-md">
             <FormField
               control={form.control}
               name="nome"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome</FormLabel>
+                  <FormLabel className="text-white">Nome</FormLabel>
                   <FormControl>
-                    <Input placeholder="Seu nome completo" {...field} />
+                    <Input placeholder="Seu nome completo" {...field} className="bg-[#1F2937] text-white border-none focus:ring-[#1A56DB]" />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-400" />
                 </FormItem>
               )}
             />
@@ -77,11 +85,11 @@ export default function OrcamentoPage() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className="text-white">Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="seu@email.com" type="email" {...field} />
+                    <Input placeholder="seu@email.com" type="email" {...field} className="bg-[#1F2937] text-white border-none focus:ring-[#1A56DB]" />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-400" />
                 </FormItem>
               )}
             />
@@ -91,11 +99,11 @@ export default function OrcamentoPage() {
               name="telefone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Telefone</FormLabel>
+                  <FormLabel className="text-white">Telefone</FormLabel>
                   <FormControl>
-                    <Input placeholder="(11) 99999-9999" {...field} />
+                    <Input placeholder="(11) 99999-9999" {...field} className="bg-[#1F2937] text-white border-none focus:ring-[#1A56DB]" />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-400" />
                 </FormItem>
               )}
             />
@@ -105,19 +113,19 @@ export default function OrcamentoPage() {
               name="tipoServico"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tipo de Serviço</FormLabel>
+                  <FormLabel className="text-white">Tipo de Serviço</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger className="bg-[#1F2937] text-white border-none focus:ring-[#1A56DB]">
                         <SelectValue placeholder="Selecione um serviço" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-[#1F2937] text-white border-none">
                       <SelectItem value="audiovisual">Áudio Visual</SelectItem>
                       <SelectItem value="dj">DJ</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage />
+                  <FormMessage className="text-red-400" />
                 </FormItem>
               )}
             />
@@ -127,20 +135,23 @@ export default function OrcamentoPage() {
               name="mensagem"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Mensagem</FormLabel>
+                  <FormLabel className="text-white">Mensagem</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Descreva seu evento e suas necessidades..."
-                      className="min-h-[120px]"
+                      className="min-h-[120px] bg-[#1F2937] text-white border-none focus:ring-[#1A56DB]"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-400" />
                 </FormItem>
               )}
             />
 
-            <Button type="submit" className="w-full">
+            <Button 
+              type="submit" 
+              className="w-full bg-[#1A56DB] text-white hover:bg-[#1E40AF] transform hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-[#1A56DB]/30"
+            >
               Enviar Orçamento
             </Button>
           </form>
